@@ -13,13 +13,27 @@ public class Main {
             String carName = scanner.next();
 
             System.out.println("Введите скорость машины №"+(i+1)+":");
-            int carSpeed = scanner.nextInt();
 
-            while (carSpeed <= 0 || carSpeed > 250) {
-                System.out.println("Неправильная скорость");
-                System.out.println("Введите скорость машины №"+(i+1)+":");
-                carSpeed = scanner.nextInt();
-            }
+
+            int carSpeed;
+
+            do {
+                if (scanner.hasNextInt()) {
+                    carSpeed = scanner.nextInt();
+                } else {
+                    System.err.print(scanner.next() + " не является числом");
+                    continue;
+                }
+
+                if (carSpeed <= 0 || carSpeed > 250) {
+                    System.err.println("Неправильная скорость");
+                    System.out.println("Введите скорость машины №"+(i+1)+":");
+                    continue;
+                }
+
+                break;
+
+            } while (true);
 
             race24HeuresduMans.addCar(new Car(carName, carSpeed));
 
